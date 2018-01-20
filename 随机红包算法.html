@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>抢红包</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      width: 300px;
+      margin: 0 auto;
+      margin-top: 20px;
+    }
+    .msg {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div>
+      <input type="text" placeholder="请输入红包金额" id="txt1">元<br/><br/>
+      <input type="text" placeholder="请输入红包数量" id="txt2">个<br/><br/>
+      <button id="btn">确定</button><br/>
+    </div>
+    <div class="msg"></div>
+  </div>
+
+  <script>
+    var oTxt1 = document.getElementById('txt1'),
+      oTxt2 = document.getElementById('txt2'),
+      oBtn = document.getElementById('btn');
+    var total, count, result;
+    oBtn.onclick = function () {
+      document.getElementsByClassName('msg')[0].innerHTML = '';
+
+      total = Number(oTxt1.value), count = Number(oTxt2.value), result = [];
+      method();
+    }
+
+    function method() {
+      if (count != 1) {
+        var number = Number((Math.random() * (total / count * 2)).toFixed(2));
+        if (total - number > 0) {
+          total = total - number;
+          count--;
+          document.getElementsByClassName('msg')[0].innerHTML += number + '<br/>';
+          method();
+        }
+      } else {
+        number = Number(total.toFixed(2));
+        document.getElementsByClassName('msg')[0].innerHTML += number;
+      }  
+    }
+  </script>
+</body>
+</html>
